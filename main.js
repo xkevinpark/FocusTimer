@@ -1,8 +1,4 @@
-function countDown() {
-    let min = Number(document.querySelector('#timerMin').innerText);
-    let seconds = Number(document.querySelector('#timerSec').innerText);
-
-
+function countDown(min, seconds, stack) {
     let timer = setInterval(() => {
         // once seconds reaches 0, reset seconds to 59
         if(seconds === 0) {
@@ -17,27 +13,33 @@ function countDown() {
         // if min === 0 && seconds === 0, clearInterval
         // end of time:
         if(min === 0 && seconds === 0){
-
+        
         clearInterval(timer);
-        alert('Time\'s up!')
+        
+        if (stack[0] === 'work') {
+            alert('Great work! Take a 5 min break.')
+            resetTimer(5);
+
+        } else {
+            alert('Back to work for 25 mins.')
+            resetTimer(25);
+        }
+        stack.pop();
         // flip endTimer to true
         // decrement seconds by 1
+        return stack;
         }
     }, 1000)
 }
 
-function resetTimer() {
-    document.querySelector('#timerMin').innerText = 25;
+function resetTimer(min) {
+    document.querySelector('#timerMin').innerText = min;
     document.querySelector('#timerSec').innerText = 0;
-}
-
-function takeABreak() {
-    document.querySelector('#timerMin').innerText = 5;
-    document.querySelector('#timerSec').innerText = 0;
-    countDown();
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+    const stack = [];
+
     // timeSecs which is set to 0, need to be converted into seconds
     const work = document.querySelector('#work');
     const reset = document.querySelector('#reset');
@@ -45,11 +47,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
     work.addEventListener('click', () => {
         // use resetTimer() to set to 25 mins
-        countDown();
+        if (stack.length === 0) {
+            let min = document.querySelector('#timerMin').innerText = 25;
+            let seconds = document.querySelector('#timerSec').innerText = 0;
+            stack.push('work');
+            countDown(min, seconds, stack);
+        }
     })
-    reset.addEventListener('click', resetTimer);
+    // reset.addEventListener('click', () => {
+    //     stack.pop();
+    //     resetTimer(25);
+    // });
     breakButton.addEventListener('click', () => {
-        takeABreak();
+        if (stack.length === 0) {
+            stack.push('break');
+            // takeABreak(stack);
+            let min = document.querySelector('#timerMin').innerText = 5;
+            let seconds = document.querySelector('#timerSec').innerText = 0;
+            countDown(min, seconds, stack);
+        }
     });
 })
 
