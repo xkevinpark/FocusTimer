@@ -9,26 +9,54 @@
 
   <style>
     #timerContainer {
-      height: 100px;
-      width: 200px;
-      border: 1px solid black;
+      height: 30px;
+      width: 150px;
+      border: 1px solid grey;
+      border-radius: 5px;
       display: flex;
+      text-align: center;
+      margin-bottom: 2px;
     }
 
+    #timerContent {
+      font-family:'Courier New', Courier, monospace;
+      font-size: 16px;
+      margin: auto;
+      display: flex;
+      line-height: 0em;
+    }
+
+    #buttonContainer {
+      width: 150px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .buttons {
+      border-radius: 5px;
+      background-color: white;
+      margin: 0 2px;
+      border: 1px solid #3399cc;
+      color: #3399cc;
+    }
   </style>
 
 </head>
 <body>
   <div id="timerContainer">
-    <p id="timerMin">25</p>
-    <p>min&nbsp;</p>
-    <p id="timerSec">0</p>
-    <p>sec</p>
+    <div id="timerContent">
+      <p id="timerMin">25</p>
+      <p>min&nbsp;</p>
+      <p id="timerSec">0</p>
+      <p>sec</p>
+    </div>
   </div>
-  <button id="work">work</button>
-  <button id="breakButton">break</button>
-  <!-- <button id="start">start</button> -->
-  <!-- <button id="pause">pause</button> -->
-  <button id="reset">reset</button>
+  <div id="buttonContainer">
+    <button id="work" class="buttons">work</button>
+    <button id="breakButton" class="buttons">break</button>
+    <!-- <button id="start">start</button> -->
+    <!-- <button id="pause">pause</button> -->
+    <button id="reset" class="buttons">reset</button>
+</div>
 </body>
 </html>

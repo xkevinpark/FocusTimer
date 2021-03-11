@@ -6,7 +6,7 @@ function countDown() {
     let timer = setInterval(() => {
         // once seconds reaches 0, reset seconds to 59
         if(seconds === 0) {
-            seconds = 59;
+            seconds = 60;
             min--; // decrement min by 1
         }
         seconds--;
@@ -38,12 +38,11 @@ function takeABreak() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-
-
     // timeSecs which is set to 0, need to be converted into seconds
-    const work = document.querySelector('#work')
-    const reset = document.querySelector('#reset')
-    const breakButton = document.querySelector('#breakButton')
+    const work = document.querySelector('#work');
+    const reset = document.querySelector('#reset');
+    const breakButton = document.querySelector('#breakButton');
+
     work.addEventListener('click', () => {
         // use resetTimer() to set to 25 mins
         countDown();
